@@ -7,5 +7,6 @@ namespace codingchallenge.ReferalApi.DataAccess
     {
         Referral GetReferral(IDbConnection conn, string referralTitle);
         string CreateReferral(IDbConnection conn, string referralTitle);
+        void IncrementReferral(IDbConnection conn, Referral referral);
     }
 }

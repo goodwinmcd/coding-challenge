@@ -28,18 +28,28 @@ namespace codingchallenge.ReferalApi.DataAccess
             var newReferral = new Referral
             {
                 Title = referralTitle,
-                Count = 0,
+                ReferralCount = 0,
             };
             var sql = @"INSERT INTO referrals
                 (Title,
                 ReferralCount)
                 VALUES
                 (@Title,
-                @Count)";
+                @ReferralCount)";
 
             _logger.LogInformation($"Adding new Referral {referralTitle}");
             conn.Execute(sql, newReferral);
             return referralTitle;
+        }
+
+        public void IncrementReferral(IDbConnection conn, Referral referral)
+        {
+            referral.ReferralCount++;
+            var sql = @"UPDATE referrals
+                SET ReferralCount = ReferralCount
+                WHERE Title = Title";
+
+            conn.Execute(sql, referral);
         }
     }
 }

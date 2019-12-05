@@ -6,5 +6,6 @@ namespace codingchallenge.ReferalApi.Services
     {
         Referral GetReferral(string referralTitle);
         string CreateReferral(string referralTitle);
+        void IncrementReferral(Referral referral);
     }
 }

@@ -37,5 +37,12 @@ namespace codingchallenge.ReferalApi.Services
 
             return referralTitle;
         }
+
+        public void IncrementReferral(Referral referral)
+        {
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+                _referralRepository.IncrementReferral(_dbConnection, referral);
+        }
     }
 }

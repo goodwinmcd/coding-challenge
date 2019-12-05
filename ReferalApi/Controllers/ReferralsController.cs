@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using codingchallenge.ReferalApi.Models;
 using codingchallenge.ReferalApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,5 +45,19 @@ namespace ReferalApi.Controllers
             var createdReferral = _referralCrudService.CreateReferral(referralTitle);
             return Created(createdReferral, new { Title = createdReferral, Count = 0 });
         }
+
+        [HttpPut("{referralName}")]
+        public ActionResult IncrementReferral(string referralTitle)
+        {
+            var referral = GetExistingReferral(referralTitle);
+            if (referral == null)
+                return BadRequest("That referral does not exist");
+
+            _referralCrudService.IncrementReferral(referral);
+            return NoContent();
+        }
+
+        private Referral GetExistingReferral(string referralTitle) =>
+            _referralCrudService.GetReferral(referralTitle);
     }
 }
