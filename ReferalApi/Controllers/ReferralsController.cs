@@ -31,6 +31,9 @@ namespace ReferalApi.Controllers
                 return NotFound("Referral does not exist");
         }
 
+        /// <summary>
+        /// This endpoint creates a referral in the db
+        /// </summary>
         [HttpPost("{referralName}")]
         public ActionResult<string> PostReferral(string referralTitle)
         {
