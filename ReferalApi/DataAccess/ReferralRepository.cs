@@ -22,5 +22,24 @@ namespace codingchallenge.ReferalApi.DataAccess
             var result = conn.Query<Referral>(sql, new { ReferralTitle = referralTitle });
             return result.FirstOrDefault();
         }
+
+        public string CreateReferral(IDbConnection conn, string referralTitle)
+        {
+            var newReferral = new Referral
+            {
+                Title = referralTitle,
+                Count = 0,
+            };
+            var sql = @"INSERT INTO referrals
+                (Title,
+                ReferralCount)
+                VALUES
+                (@Title,
+                @Count)";
+
+            _logger.LogInformation($"Adding new Referral {referralTitle}");
+            conn.Execute(sql, newReferral);
+            return referralTitle;
+        }
     }
 }

@@ -23,10 +23,19 @@ namespace codingchallenge.ReferalApi.Services
             Referral referral;
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
-            {
-                referral = _referralRepository.GetReferral(_dbConnection, referralTitle);
-            }
+                referral = _referralRepository.GetReferral(
+                    _dbConnection,
+                    referralTitle.ToLower());
             return referral;
+        }
+
+        public string CreateReferral(string referralTitle)
+        {
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+                _referralRepository.CreateReferral(_dbConnection, referralTitle);
+
+            return referralTitle;
         }
     }
 }

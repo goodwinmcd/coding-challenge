@@ -30,5 +30,16 @@ namespace ReferalApi.Controllers
             else
                 return NotFound("Referral does not exist");
         }
+
+        [HttpPost("{referralName}")]
+        public ActionResult<string> PostReferral(string referralTitle)
+        {
+            var referral = _referralCrudService.GetReferral(referralTitle);
+            if (referral != null)
+                return Conflict("That referral already exist");
+
+            var createdReferral = _referralCrudService.CreateReferral(referralTitle);
+            return Created(createdReferral, new { Title = createdReferral, Count = 0 });
+        }
     }
 }

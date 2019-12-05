@@ -29,7 +29,6 @@ namespace ReferalApi
         public void ConfigureServices(IServiceCollection services)
         {
             string dbConnectionString = this.Configuration.GetConnectionString("PostgresConnection");
-            Console.WriteLine(dbConnectionString);
             services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(dbConnectionString));
             RegisterDI(services);
 
