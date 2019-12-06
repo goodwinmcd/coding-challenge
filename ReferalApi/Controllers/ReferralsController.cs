@@ -30,12 +30,12 @@ namespace ReferalApi.Controllers
         }
 
         /// <summary>
-        /// Endpoint to retrieve all referrals
+        /// Pagenated Endpoint to retrieve all referrals
         /// </summary>
         [HttpGet("all")]
-        public ActionResult<IEnumerable<Referral>> GetReferrals()
+        public ActionResult<IEnumerable<Referral>> GetReferrals([FromQuery] int page = 1)
         {
-            var referrals = _referralCrudService.GetReferrals();
+            var referrals = _referralCrudService.GetReferrals(page);
             referrals = referrals ?? new List<Referral>();
             return Ok(referrals);
         }

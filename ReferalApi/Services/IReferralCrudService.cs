@@ -6,7 +6,7 @@ namespace codingchallenge.ReferalApi.Services
     public interface IReferralCrudService
     {
         Referral GetReferral(string referralTitle);
-        IEnumerable<Referral> GetReferrals();
+        IEnumerable<Referral> GetReferrals(int page);
         string CreateReferral(string referralTitle);
         void EditReferral(Referral referral, Referral newReferral);
         void DeleteReferral(string referralTitle);

@@ -33,13 +33,13 @@ namespace codingchallenge.ReferalApi.Services
             return referral;
         }
 
-        public IEnumerable<Referral> GetReferrals()
+        public IEnumerable<Referral> GetReferrals(int page)
         {
             IEnumerable<Referral> referrals;
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                referrals = _referralRepository.GetReferrals(_dbConnection);
+                referrals = _referralRepository.GetReferrals(_dbConnection, page);
                 transaction.Commit();
             }
             _dbConnection.Close();

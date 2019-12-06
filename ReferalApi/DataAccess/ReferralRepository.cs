@@ -24,11 +24,15 @@ namespace codingchallenge.ReferalApi.DataAccess
             return result.FirstOrDefault();
         }
 
-        public IEnumerable<Referral> GetReferrals(IDbConnection conn)
+        public IEnumerable<Referral> GetReferrals(IDbConnection conn, int page)
         {
-            _logger.LogInformation($"Retrieving all referrals");
-            var sql = "SELECT title, referralCount FROM referrals";
-            var result = conn.Query<Referral>(sql);
+            _logger.LogInformation($"Retrieving all referrals paginated at {page}");
+            var offset = (page - 1) * 10;
+            var sql = @"SELECT title, referralCount
+                FROM referrals
+                LIMIT 10
+                OFFSET @Offset";
+            var result = conn.Query<Referral>(sql, new { Offset = offset });
             return result;
         }
 
