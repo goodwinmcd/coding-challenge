@@ -44,6 +44,7 @@ namespace codingchallenge.ReferalApi.DataAccess
 
         public void IncrementReferral(IDbConnection conn, Referral referral)
         {
+            _logger.LogInformation($"Incrementing count of referral {referral.Title}");
             referral.ReferralCount++;
             var sql = @"UPDATE referrals
                 SET ReferralCount = ReferralCount
