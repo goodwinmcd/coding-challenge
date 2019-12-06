@@ -30,7 +30,7 @@ namespace ReferalApi.Controllers
         }
 
         /// <summary>
-        /// Endpoint to retrieve a all referrals
+        /// Endpoint to retrieve all referrals
         /// </summary>
         [HttpGet("all")]
         public ActionResult<IEnumerable<Referral>> GetReferrals()
@@ -54,6 +54,9 @@ namespace ReferalApi.Controllers
             return Created(createdReferral, new { Title = createdReferral, Count = 0 });
         }
 
+        /// <summary>
+        /// This endpoint increments a referral count in the db
+        /// </summary>
         [HttpPut("{referralTitle}")]
         public ActionResult IncrementReferral(string referralTitle)
         {
