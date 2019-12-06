@@ -64,7 +64,26 @@ namespace ReferalApi.Controllers
             if (referral == null)
                 return BadRequest("That referral does not exist");
 
-            _referralCrudService.IncrementReferral(referral);
+            referral.ReferralCount++;
+            _referralCrudService.EditReferral(referral);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// This endpoint changes title of a referral
+        /// </summary>
+        [HttpPut("editTitle")]
+        public ActionResult EditReferralTitle([FromBody]EditTitleRequest editData)
+        {
+            if (!editData.Validate())
+                return BadRequest("You must provide the old title and new title");
+
+            var referral = GetExistingReferral(editData.Title);
+            if (referral == null)
+                return BadRequest("The referral does not exist");
+
+            referral.Title = editData.NewTitle;
+            _referralCrudService.EditReferral(referral);
             return NoContent();
         }
 

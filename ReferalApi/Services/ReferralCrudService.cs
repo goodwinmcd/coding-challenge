@@ -61,12 +61,12 @@ namespace codingchallenge.ReferalApi.Services
             return referralTitle;
         }
 
-        public void IncrementReferral(Referral referral)
+        public void EditReferral(Referral referral)
         {
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                _referralRepository.IncrementReferral(_dbConnection, referral);
+                _referralRepository.EditReferral(_dbConnection, referral);
                 transaction.Commit();
             }
             _dbConnection.Close();

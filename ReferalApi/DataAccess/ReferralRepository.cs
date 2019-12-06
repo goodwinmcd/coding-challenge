@@ -51,12 +51,12 @@ namespace codingchallenge.ReferalApi.DataAccess
             return referralTitle;
         }
 
-        public void IncrementReferral(IDbConnection conn, Referral referral)
+        public void EditReferral(IDbConnection conn, Referral referral)
         {
             _logger.LogInformation($"Incrementing count of referral {referral.Title}");
             referral.ReferralCount++;
             var sql = @"UPDATE referrals
-                SET referralCount = @ReferralCount
+                SET referralCount = @ReferralCount, title = @Title
                 WHERE title = @Title";
 
             conn.Execute(sql, referral);
