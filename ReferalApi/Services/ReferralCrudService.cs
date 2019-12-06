@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using codingchallenge.ReferalApi.DataAccess;
@@ -61,12 +60,12 @@ namespace codingchallenge.ReferalApi.Services
             return referralTitle;
         }
 
-        public void EditReferral(Referral referral)
+        public void EditReferral(Referral referral, Referral newReferral)
         {
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
             {
-                _referralRepository.EditReferral(_dbConnection, referral);
+                _referralRepository.EditReferral(_dbConnection, referral, newReferral);
                 transaction.Commit();
             }
             _dbConnection.Close();

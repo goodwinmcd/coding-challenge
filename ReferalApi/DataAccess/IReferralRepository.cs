@@ -9,7 +9,7 @@ namespace codingchallenge.ReferalApi.DataAccess
         Referral GetReferral(IDbConnection conn, string referralTitle);
         IEnumerable<Referral> GetReferrals(IDbConnection conn);
         string CreateReferral(IDbConnection conn, string referralTitle);
-        void EditReferral(IDbConnection conn, Referral referral);
+        void EditReferral(IDbConnection conn, Referral referral, Referral newReferral);
         void DeleteReferral(IDbConnection conn, string referralTitle);
     }
 }

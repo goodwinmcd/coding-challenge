@@ -64,8 +64,12 @@ namespace ReferalApi.Controllers
             if (referral == null)
                 return BadRequest("That referral does not exist");
 
-            referral.ReferralCount++;
-            _referralCrudService.EditReferral(referral);
+            var newReferral = new Referral
+            {
+                Title = referralTitle,
+                ReferralCount = referral.ReferralCount + 1
+            };
+            _referralCrudService.EditReferral(referral, newReferral);
             return NoContent();
         }
 
@@ -75,18 +79,25 @@ namespace ReferalApi.Controllers
         [HttpPut("editTitle")]
         public ActionResult EditReferralTitle([FromBody]EditTitleRequest editData)
         {
-            if (!editData.Validate())
+            if (editData.Validate())
                 return BadRequest("You must provide the old title and new title");
 
             var referral = GetExistingReferral(editData.Title);
             if (referral == null)
                 return BadRequest("The referral does not exist");
 
-            referral.Title = editData.NewTitle;
-            _referralCrudService.EditReferral(referral);
+            var newReferral = new Referral
+            {
+                Title = editData.NewTitle,
+                ReferralCount = referral.ReferralCount,
+            };
+            _referralCrudService.EditReferral(referral, newReferral);
             return NoContent();
         }
 
+        /// <summary>
+        /// This endpoint deletes a referral
+        /// </summary>
         [HttpDelete("{referralTitle}")]
         public ActionResult DeleteReferral(string referralTitle)
         {

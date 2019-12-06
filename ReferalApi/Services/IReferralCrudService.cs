@@ -8,7 +8,7 @@ namespace codingchallenge.ReferalApi.Services
         Referral GetReferral(string referralTitle);
         IEnumerable<Referral> GetReferrals();
         string CreateReferral(string referralTitle);
-        void EditReferral(Referral referral);
+        void EditReferral(Referral referral, Referral newReferral);
         void DeleteReferral(string referralTitle);
     }
 }

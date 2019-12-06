@@ -51,14 +51,20 @@ namespace codingchallenge.ReferalApi.DataAccess
             return referralTitle;
         }
 
-        public void EditReferral(IDbConnection conn, Referral referral)
+        public void EditReferral(IDbConnection conn, Referral referral, Referral newReferral)
         {
-            _logger.LogInformation($"Incrementing count of referral {referral.Title}");
+            _logger.LogInformation($"Editing referral {referral.Title}");
             var sql = @"UPDATE referrals
                 SET referralCount = @ReferralCount, title = @Title
-                WHERE title = @Title";
+                WHERE title = @OldTitle";
 
-            conn.Execute(sql, referral);
+            conn.Execute(
+                sql,
+                new {
+                    ReferralCount = newReferral.ReferralCount,
+                    Title = newReferral.Title,
+                    OldTitle = referral.Title
+                 });
         }
 
         public void DeleteReferral(IDbConnection conn, string referralTitle)
