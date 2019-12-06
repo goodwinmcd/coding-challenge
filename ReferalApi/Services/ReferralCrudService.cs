@@ -23,9 +23,13 @@ namespace codingchallenge.ReferalApi.Services
             Referral referral;
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
+            {
                 referral = _referralRepository.GetReferral(
                     _dbConnection,
                     referralTitle.ToLower());
+                transaction.Commit();
+            }
+            _dbConnection.Close();
             return referral;
         }
 
@@ -33,8 +37,13 @@ namespace codingchallenge.ReferalApi.Services
         {
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
-                _referralRepository.CreateReferral(_dbConnection, referralTitle);
-
+            {
+                _referralRepository.CreateReferral(
+                    _dbConnection,
+                    referralTitle.ToLower());
+                transaction.Commit();
+            }
+            _dbConnection.Close();
             return referralTitle;
         }
 
@@ -42,7 +51,11 @@ namespace codingchallenge.ReferalApi.Services
         {
             _dbConnection.Open();
             using (var transaction = _dbConnection.BeginTransaction())
+            {
                 _referralRepository.IncrementReferral(_dbConnection, referral);
+                transaction.Commit();
+            }
+            _dbConnection.Close();
         }
     }
 }

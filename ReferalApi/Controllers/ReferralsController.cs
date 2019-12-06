@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using codingchallenge.ReferalApi.Models;
+﻿using codingchallenge.ReferalApi.Models;
 using codingchallenge.ReferalApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +17,7 @@ namespace ReferalApi.Controllers
         /// <summary>
         /// Endpoint to retrieve a referral
         /// </summary>
-        [HttpGet("{referralName}")]
+        [HttpGet("{referralTitle}")]
         public ActionResult<string> GetReferral(string referralTitle)
         {
             var referral = _referralCrudService.GetReferral(referralTitle);
@@ -35,8 +31,8 @@ namespace ReferalApi.Controllers
         /// <summary>
         /// This endpoint creates a referral in the db
         /// </summary>
-        [HttpPost("{referralName}")]
-        public ActionResult<string> PostReferral(string referralTitle)
+        [HttpPost("{referralTitle}")]
+        public ActionResult<string> PostReferral([FromRoute]string referralTitle)
         {
             var referral = _referralCrudService.GetReferral(referralTitle);
             if (referral != null)
@@ -46,7 +42,7 @@ namespace ReferalApi.Controllers
             return Created(createdReferral, new { Title = createdReferral, Count = 0 });
         }
 
-        [HttpPut("{referralName}")]
+        [HttpPut("{referralTitle}")]
         public ActionResult IncrementReferral(string referralTitle)
         {
             var referral = GetExistingReferral(referralTitle);

@@ -16,4 +16,4 @@ EXPOSE 3000
 ENV ConnectionStrings__PostgresConnection=host=referral.postgres.compose;Username=docker;Password=docker;Port=5432;Database=referrals;
 
 COPY --from=build /app/out .
-ENTRYPOINT ["dotnet", "ibotta_challenge.dll"]
+ENTRYPOINT ["dotnet", "ReferalApi.dll"]

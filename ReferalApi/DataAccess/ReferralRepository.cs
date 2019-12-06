@@ -18,7 +18,7 @@ namespace codingchallenge.ReferalApi.DataAccess
         public Referral GetReferral(IDbConnection conn, string referralTitle)
         {
             _logger.LogInformation($"Checking database for referral {referralTitle}");
-            var sql = "SELECT Title FROM referrals WHERE Title=@referralTitle";
+            var sql = "SELECT title, referralCount FROM referrals WHERE Title=@referralTitle";
             var result = conn.Query<Referral>(sql, new { ReferralTitle = referralTitle });
             return result.FirstOrDefault();
         }
@@ -31,8 +31,8 @@ namespace codingchallenge.ReferalApi.DataAccess
                 ReferralCount = 0,
             };
             var sql = @"INSERT INTO referrals
-                (Title,
-                ReferralCount)
+                (title,
+                referralCount)
                 VALUES
                 (@Title,
                 @ReferralCount)";
@@ -47,8 +47,8 @@ namespace codingchallenge.ReferalApi.DataAccess
             _logger.LogInformation($"Incrementing count of referral {referral.Title}");
             referral.ReferralCount++;
             var sql = @"UPDATE referrals
-                SET ReferralCount = ReferralCount
-                WHERE Title = Title";
+                SET referralCount = @ReferralCount
+                WHERE title = @Title";
 
             conn.Execute(sql, referral);
         }
