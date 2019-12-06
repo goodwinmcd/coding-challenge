@@ -87,6 +87,17 @@ namespace ReferalApi.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{referralTitle}")]
+        public ActionResult DeleteReferral(string referralTitle)
+        {
+            if (GetExistingReferral(referralTitle) == null)
+                return BadRequest("That referral does not exist");
+
+            _referralCrudService.DeleteReferral(referralTitle);
+
+            return NoContent();
+        }
+
         private Referral GetExistingReferral(string referralTitle) =>
             _referralCrudService.GetReferral(referralTitle);
     }

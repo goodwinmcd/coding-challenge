@@ -61,5 +61,14 @@ namespace codingchallenge.ReferalApi.DataAccess
 
             conn.Execute(sql, referral);
         }
+
+        public void DeleteReferral(IDbConnection conn, string referralTitle)
+        {
+            _logger.LogInformation($"Deleting referral {referralTitle}");
+
+            var sql = @"DELETE FROM referrals WHERE title=@ReferralTitle";
+
+            conn.Execute(sql, new { ReferralTitle = referralTitle });
+        }
     }
 }
