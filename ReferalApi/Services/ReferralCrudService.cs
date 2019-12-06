@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using codingchallenge.ReferalApi.DataAccess;
 using codingchallenge.ReferalApi.Models;
@@ -31,6 +32,19 @@ namespace codingchallenge.ReferalApi.Services
             }
             _dbConnection.Close();
             return referral;
+        }
+
+        public IEnumerable<Referral> GetReferrals()
+        {
+            IEnumerable<Referral> referrals;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                referrals = _referralRepository.GetReferrals(_dbConnection);
+                transaction.Commit();
+            }
+            _dbConnection.Close();
+            return referrals;
         }
 
         public string CreateReferral(string referralTitle)

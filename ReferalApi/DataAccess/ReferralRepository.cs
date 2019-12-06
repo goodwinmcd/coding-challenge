@@ -3,6 +3,7 @@ using codingchallenge.ReferalApi.Models;
 using Microsoft.Extensions.Logging;
 using Dapper;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace codingchallenge.ReferalApi.DataAccess
 {
@@ -21,6 +22,14 @@ namespace codingchallenge.ReferalApi.DataAccess
             var sql = "SELECT title, referralCount FROM referrals WHERE Title=@referralTitle";
             var result = conn.Query<Referral>(sql, new { ReferralTitle = referralTitle });
             return result.FirstOrDefault();
+        }
+
+        public IEnumerable<Referral> GetReferrals(IDbConnection conn)
+        {
+            _logger.LogInformation($"Retrieving all referrals");
+            var sql = "SELECT title, referralCount FROM referrals";
+            var result = conn.Query<Referral>(sql);
+            return result;
         }
 
         public string CreateReferral(IDbConnection conn, string referralTitle)

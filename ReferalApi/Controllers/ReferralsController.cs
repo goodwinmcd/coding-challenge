@@ -1,4 +1,5 @@
-﻿using codingchallenge.ReferalApi.Models;
+﻿using System.Collections.Generic;
+using codingchallenge.ReferalApi.Models;
 using codingchallenge.ReferalApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,14 +19,25 @@ namespace ReferalApi.Controllers
         /// Endpoint to retrieve a referral
         /// </summary>
         [HttpGet("{referralTitle}")]
-        public ActionResult<string> GetReferral(string referralTitle)
+        public ActionResult<Referral> GetReferral(string referralTitle)
         {
             var referral = _referralCrudService.GetReferral(referralTitle);
 
             if (referral != null)
-                return Ok(new { Referral = referral });
+                return Ok(referral);
             else
                 return NotFound("Referral does not exist");
+        }
+
+        /// <summary>
+        /// Endpoint to retrieve a all referrals
+        /// </summary>
+        [HttpGet("all")]
+        public ActionResult<IEnumerable<Referral>> GetReferrals()
+        {
+            var referrals = _referralCrudService.GetReferrals();
+            referrals = referrals ?? new List<Referral>();
+            return Ok(referrals);
         }
 
         /// <summary>
