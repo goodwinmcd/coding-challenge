@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  referral.api.compose:
+    image:
+      referral.webapi.compose
+    container_name:
+      referral.webapi.compose
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+
+  referral.postgres.compose:
+    image:
+      referral.postgres.compose
+    container_name:
+      referral.postgres.compose
+    build:
+      context: Postgres/
+    ports:
+      - "5432:5432"
