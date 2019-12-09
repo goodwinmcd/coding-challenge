@@ -10,5 +10,6 @@ namespace codingchallenge.ReferalApi.Services
         string CreateReferral(string referralTitle);
         void EditReferral(Referral referral, Referral newReferral);
         void DeleteReferral(string referralTitle);
+        void DeleteAllReferrals();
     }
 }

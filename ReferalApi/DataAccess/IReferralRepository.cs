@@ -11,5 +11,6 @@ namespace codingchallenge.ReferalApi.DataAccess
         string CreateReferral(IDbConnection conn, string referralTitle);
         void EditReferral(IDbConnection conn, Referral referral, Referral newReferral);
         void DeleteReferral(IDbConnection conn, string referralTitle);
+        void DeleteAllReferrals(IDbConnection conn);
     }
 }

@@ -120,6 +120,16 @@ namespace ReferalApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// This endpoint deletes all referrals
+        /// </summary>
+        [HttpDelete("{referralTitle}")]
+        public ActionResult DeleteAllReferrals()
+        {
+            _referralCrudService.DeleteAllReferrals();
+            return NoContent();
+        }
+
         private Referral GetExistingReferral(string referralTitle) =>
             _referralCrudService.GetReferral(referralTitle);
     }

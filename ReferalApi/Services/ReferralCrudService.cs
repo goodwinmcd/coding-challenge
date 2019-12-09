@@ -81,5 +81,16 @@ namespace codingchallenge.ReferalApi.Services
             }
             _dbConnection.Close();
         }
+
+        public void DeleteAllReferrals()
+        {
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                _referralRepository.DeleteAllReferrals(_dbConnection);
+                transaction.Commit();
+            }
+            _dbConnection.Close();
+        }
     }
 }
