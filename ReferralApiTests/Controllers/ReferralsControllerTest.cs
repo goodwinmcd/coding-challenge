@@ -133,6 +133,92 @@ namespace ReferralApiTests
             Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.Conflict);
         }
 
+        [TestMethod]
+        public void IncrementingExistingReferral_ShouldReturnNoContent()
+        {
+            var referralTitle = "dummy";
+            var existingReferral = new Referral
+            {
+                Title = referralTitle,
+                ReferralCount = 0
+            };
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns(existingReferral);
+
+            var result = _classUnderTest.IncrementReferral(referralTitle);
+            var statusCode = result as NoContentResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.NoContent);
+        }
+
+        [TestMethod]
+        public void IncrementingNonExistingReferral_ShouldReturnBadRequest()
+        {
+            var referralTitle = "dummy";
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns<Referral>(null);
+
+            var result = _classUnderTest.IncrementReferral(referralTitle);
+            var statusCode = result as BadRequestObjectResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
+        }
+
+        [TestMethod]
+        public void EditingTitleWithValidRequest_ShouldReturnNoContent()
+        {
+            var referralTitle = "dummy";
+            var request = new EditTitleRequest
+            {
+                NewTitle = "new",
+                Title = referralTitle,
+            } ;
+            var existingReferral = new Referral
+            {
+                Title = referralTitle,
+                ReferralCount = 0
+            };
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns(existingReferral);
+
+            var result = _classUnderTest.EditReferralTitle(request);
+            var statusCode = result as NoContentResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.NoContent);
+        }
+
+        [TestMethod]
+        public void EditingTitleWithInValidRequest_ShouldReturnBadRequest()
+        {
+            var referralTitle = "dummy";
+            var request = new EditTitleRequest
+            {
+                Title = referralTitle,
+            };
+
+            var result = _classUnderTest.EditReferralTitle(request);
+            var statusCode = result as BadRequestObjectResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
+        }
+
+        [TestMethod]
+        public void EditingTitleWithValidRequestButNonExistingReferral_ShouldReturnBadRequest()
+        {
+            var referralTitle = "dummy";
+            var request = new EditTitleRequest
+            {
+                Title = referralTitle,
+                NewTitle = "valid",
+            };
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns<Referral>(null);
+
+            var result = _classUnderTest.EditReferralTitle(request);
+            var statusCode = result as BadRequestObjectResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
+        }
+
         private IEnumerable<Referral> BuildReferralList()
         {
             var referral1 = new Referral
