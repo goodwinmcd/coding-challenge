@@ -244,6 +244,15 @@ namespace ReferralApiTests
             Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
         }
 
+        [TestMethod]
+        public void DeletingAllReferrals_ShouldReturnNoContent()
+        {
+            var result = _classUnderTest.DeleteAllReferrals();
+            var statusCode = result as NoContentResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.NoContent);
+        }
+
+
         private IEnumerable<Referral> BuildReferralList()
         {
             var referral1 = new Referral
