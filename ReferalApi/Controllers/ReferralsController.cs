@@ -123,7 +123,7 @@ namespace ReferalApi.Controllers
         /// <summary>
         /// This endpoint deletes all referrals
         /// </summary>
-        [HttpDelete("{referralTitle}")]
+        [HttpDelete("all")]
         public ActionResult DeleteAllReferrals()
         {
             _referralCrudService.DeleteAllReferrals();
