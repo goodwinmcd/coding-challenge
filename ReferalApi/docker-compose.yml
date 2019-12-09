@@ -6,6 +6,8 @@ services:
       referral.webapi.compose
     container_name:
       referral.webapi.compose
+    environment:
+      - ConnectionStrings__PostgresConnection=host=referral.postgres.compose;Username=docker;Password=docker;Port=5432;Database=referrals;
     build:
       context: .
     ports:

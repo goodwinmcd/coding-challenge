@@ -10,7 +10,7 @@ namespace ReferalApi
         {
             var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
             CreateWebHostBuilder(args)
-                .UseUrls($"http://0.0.0.0:{test}/")
+                .UseUrls($"http://0.0.0.0:{port}/")
                 .Build()
                 .Run();
         }
