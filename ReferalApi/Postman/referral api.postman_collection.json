@@ -11,15 +11,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/testing1",
+					"raw": "{{address}}api/referrals/testing2",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
-						"testing1"
+						"testing2"
 					]
 				}
 			},
@@ -31,13 +29,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/testing1",
+					"raw": "{{address}}api/referrals/testing1",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
 						"testing1"
 					]
@@ -51,13 +47,11 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/testing1",
+					"raw": "{{address}}api/referrals/testing1",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
 						"testing1"
 					]
@@ -71,13 +65,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/all",
+					"raw": "{{address}}api/referrals/all",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
 						"all"
 					]
@@ -91,15 +83,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/testing",
+					"raw": "{{address}}api/referrals/testing2",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
-						"testing"
+						"testing2"
 					]
 				}
 			},
@@ -147,13 +137,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/all",
+					"raw": "{{address}}api/referrals/all",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
 						"all"
 					]
@@ -167,13 +155,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}:{{port}}/api/referrals/pages?page=1",
+					"raw": "{{address}}api/referrals/pages?page=1",
 					"host": [
-						"{{address}}"
+						"{{address}}api"
 					],
-					"port": "{{port}}",
 					"path": [
-						"api",
 						"referrals",
 						"pages"
 					],
