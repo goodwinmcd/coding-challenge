@@ -1,4 +1,6 @@
 ## Hosting
+I chose the backend focused track.
+
 The app is hosted with Heroku here: https://ambassador-referral-api.herokuapp.com/
 
 That is the base url. All API endpoints have /api/referrals appended to them.
@@ -25,7 +27,11 @@ I wrote the application in C# using the latest version of the .net core framewor
 
 The application architecture is straight forward. It has a controller, service (AKA logic), and
 repository layer. There is a single controller with a corresponding service and repo for
-performing CRUD operations on a referral.
+performing CRUD operations on a referral. The service layer prevents the controllers from getting
+bloated as features are added to the application. The repository layer is only concerned with
+database actions. The service layer also prevents the repo layer from becoming bloated with
+business logic in the future. This separation of concerns allows the app to be more maintainable
+in the future.
 
 The application was simple enough to not use any advanced design patterns. IOC/DI was the only
 notable pattern I used.
@@ -79,7 +85,12 @@ on the referrals would be really interesting.
 
 Here is another API I build recently for finding anagrams: https://gitlab.com/goodwinmcd/anagram-api
 
+The readme goes into a lot of technical details of the decisions that I made and the route I took for
+finding anagrams in the most efficient way.
+
 Here is a small service that I made for scraping an imdb id based off a movie title and release year: https://gitlab.com/goodwinmcd/movie-data
 
 I plan on making that scraper a part of a larger project for collecting movie data. I ultimately will deploy a model
 that leverages that data for predicting movie ratings from rotten tomatoes, imdb, and meta critic.
+
+I plan to use this scraper/ML Model as my practicum for my masters degree.
