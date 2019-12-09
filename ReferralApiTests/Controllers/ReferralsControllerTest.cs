@@ -219,6 +219,31 @@ namespace ReferralApiTests
             Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
         }
 
+        [TestMethod]
+        public void DeletingReferral_ShouldReturnNoContent()
+        {
+            var referralTitle = "dummy";
+            var existingReferral = new Referral
+            {
+                Title = referralTitle,
+                ReferralCount = 0
+            };
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns(existingReferral);
+            var result = _classUnderTest.DeleteReferral(referralTitle);
+            var statusCode = result as NoContentResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.NoContent);
+        }
+
+        [TestMethod]
+        public void DeletingReferralOnNonExistingReferral_ShouldReturnBadRequest()
+        {
+            var referralTitle = "dummy";
+            var result = _classUnderTest.DeleteReferral(referralTitle);
+            var statusCode = result as BadRequestObjectResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.BadRequest);
+        }
+
         private IEnumerable<Referral> BuildReferralList()
         {
             var referral1 = new Referral
