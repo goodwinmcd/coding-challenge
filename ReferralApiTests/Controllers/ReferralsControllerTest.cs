@@ -97,6 +97,42 @@ namespace ReferralApiTests
             Assert.AreEqual(finalResult.Count, 0);
         }
 
+        [TestMethod]
+        public void CreatingNewReferral_ShouldReturnCreatedStatusCode()
+        {
+            var referralTitle = "dummy";
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns<string>(null);
+
+            _mockReferralCrudService.Setup(m => m.CreateReferral(referralTitle))
+                .Returns(referralTitle);
+
+            var result = _classUnderTest.PostReferral(referralTitle);
+
+            var statusCode = result.Result as CreatedResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.Created);
+        }
+
+        [TestMethod]
+        public void CreatingNewReferralThatExist_ShouldCreateConflict()
+        {
+            var referralTitle = "dummy";
+            var existingReferral = new Referral
+            {
+                Title = referralTitle,
+                ReferralCount = 0,
+            };
+
+            _mockReferralCrudService.Setup(m => m.GetReferral(referralTitle))
+                .Returns(existingReferral);
+
+            var result = _classUnderTest.PostReferral(referralTitle);
+
+            var statusCode = result.Result as ConflictObjectResult;
+            Assert.AreEqual(statusCode.StatusCode, (int)HttpStatusCode.Conflict);
+        }
+
         private IEnumerable<Referral> BuildReferralList()
         {
             var referral1 = new Referral
