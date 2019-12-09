@@ -33,7 +33,7 @@ namespace codingchallenge.ReferalApi.Services
             return referral;
         }
 
-        public IEnumerable<Referral> GetReferrals(int page)
+        public IEnumerable<Referral> GetReferrals(int? page = null)
         {
             IEnumerable<Referral> referrals;
             _dbConnection.Open();

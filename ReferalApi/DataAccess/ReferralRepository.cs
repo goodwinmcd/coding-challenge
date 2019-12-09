@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Dapper;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace codingchallenge.ReferalApi.DataAccess
 {
@@ -24,14 +25,20 @@ namespace codingchallenge.ReferalApi.DataAccess
             return result.FirstOrDefault();
         }
 
-        public IEnumerable<Referral> GetReferrals(IDbConnection conn, int page)
+        public IEnumerable<Referral> GetReferrals(IDbConnection conn, int? page)
         {
             _logger.LogInformation($"Retrieving all referrals paginated at {page}");
             var offset = (page - 1) * 10;
-            var sql = @"SELECT title, referralCount
-                FROM referrals
-                LIMIT 10
-                OFFSET @Offset";
+            var sb = new StringBuilder();
+            string sql;
+            if (page == null)
+                sql = @"SELECT title, referralCount
+                    FROM referrals
+                    LIMIT 10
+                    OFFSET @Offset";
+            else
+                sql = @"SELECT title, referralCount
+                    FROM referrals";
             var result = conn.Query<Referral>(sql, new { Offset = offset });
             return result;
         }
