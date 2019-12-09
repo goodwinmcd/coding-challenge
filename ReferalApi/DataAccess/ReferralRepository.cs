@@ -29,9 +29,8 @@ namespace codingchallenge.ReferalApi.DataAccess
         {
             _logger.LogInformation($"Retrieving all referrals paginated at {page}");
             var offset = (page - 1) * 10;
-            var sb = new StringBuilder();
             string sql;
-            if (page == null)
+            if (page != null)
                 sql = @"SELECT title, referralCount
                     FROM referrals
                     LIMIT 10
