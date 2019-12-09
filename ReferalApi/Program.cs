@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ReferalApi
@@ -7,8 +8,9 @@ namespace ReferalApi
     {
         public static void Main(string[] args)
         {
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
             CreateWebHostBuilder(args)
-                .UseUrls("http://0.0.0.0:3000/")
+                .UseUrls($"http://0.0.0.0:{test}/")
                 .Build()
                 .Run();
         }
