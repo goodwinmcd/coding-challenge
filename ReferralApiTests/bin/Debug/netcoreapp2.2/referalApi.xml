@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>referalApi</name>
+    </assembly>
+    <members>
+        <member name="M:ReferalApi.Controllers.ReferralsController.GetReferral(System.String)">
+            <summary>
+            Endpoint to retrieve a referral
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.GetReferrals(System.Int32)">
+            <summary>
+            Pagenated Endpoint to retrieve 10 referrals at a time
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.GetAllReferrals">
+            <summary>
+            Endpoint to retrieve all referrals
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.PostReferral(System.String)">
+            <summary>
+            This endpoint creates a referral in the db
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.IncrementReferral(System.String)">
+            <summary>
+            This endpoint increments a referral count in the db
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.EditReferralTitle(codingchallenge.ReferalApi.Models.EditTitleRequest)">
+            <summary>
+            This endpoint changes title of a referral
+            </summary>
+        </member>
+        <member name="M:ReferalApi.Controllers.ReferralsController.DeleteReferral(System.String)">
+            <summary>
+            This endpoint deletes a referral
+            </summary>
+        </member>
+    </members>
+</doc>
